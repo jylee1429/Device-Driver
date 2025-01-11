@@ -1,0 +1,19 @@
+This project demonstrates the creation of a device driver for controlling an LED and a switch using device tree overlays on a Raspberry Pi 4.
+
+Steps to Create and Load the Device Driver
+1. Write the Device Tree Source (DTS) File
+  Create a file named led-controller.dts containing the overlay configuration for the LED and switch.
+2. Compile the DTS File to Create a Device Tree Blob Overlay (DTBO)
+  Use the following command to compile the DTS file: dtc -@ -I dts -O dtb -o led-controller.dtbo led-controller.dts
+3. Copy the DTBO File to the Overlays Directory
+  Copy the generated led-controller.dtbo file to the overlays directory: sudo cp led-controller.dtbo /boot/firmware/overlays/
+4. Add the Overlay to the Configuration File
+  Edit the /boot/firmware/config.txt file and add the following line: dtoverlay=led-controller
+5. Reboot the System
+6. Build the Kernel Module
+  Compile the kernel module (led_controller.c) using the Raspberry Pi kernel headers
+7. Insert the Kernel Module
+  Use the following command to insert the kernel module: sudo insmod led_controller.ko
+
+Unloading the Module
+  To remove the kernel module, use the following command: sudo rmmod led_controller
