@@ -1,0 +1,27 @@
+/dts-v1/;
+/plugin/;
+
+/ {
+    fragment@0 {
+        target-path = "/";
+        __overlay__ {
+            led_controller {
+                compatible = "led-controller";
+                label = "led-controller";
+                
+                led {
+                    gpios = <&gpio 17 0>;
+                    label = "led";
+                    default-state = "off";  
+                };
+                switch {
+                    gpios = <&gpio 27 0>;
+                    label = "switch";
+                    debounce-interval = <50>;
+                    interrupt-parent = <&gpio>;
+                    interrupts = <27 2>;
+                };
+            };
+        };
+    };
+};
